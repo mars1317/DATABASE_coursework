@@ -1,4 +1,5 @@
 import numpy as np
+import math
 from random import uniform
 from corellation import pearson
 sigma=0.3
@@ -20,20 +21,16 @@ def PNN(input_layer, output_layer):
         return output_layer
 
     return result
-x = ([[]]*1000)
+x = ([[]]*10000)
 y = []
 for i in range(len(x)):
         x[i] = [(uniform(40, 200)), (uniform(150, 250)), (uniform(15, 80))]
 length = len(x)
 for i in range(length):
     y.append(447.6+(9.2*x[i][0])+(3.1*x[i][1])-(4.3*x[i][2]))
-#
-# print(x)
-# print('---')
-# print(y)
+
 output = PNN(x, y)
 
-# a = [50, 165, 20]
-# b = [90, 150, 24]
-# print('\n', a, output(a), '\n', b, output(b))
-print('m', pearson(x[2],y))
+a = [50, 165, 20]
+print(output(a))
+pearson_res= math.fabs(pearson(x[0],y)*100)

@@ -1,6 +1,7 @@
 import sqlalchemy
 import sqlalchemy
 from flask_login import UserMixin
+from clasterization import *
 from flask import Flask, render_template, request, redirect, url_for, session, make_response
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
@@ -151,11 +152,12 @@ def new_dish():
     admin = False
     db = PostgresDb()
     allDishes = db.sqlalchemy_session.query(Dish).all()
+    # alldeparts = db.sqlalchemy_session.query(Departmanet).all()
     allIngridients = db.sqlalchemy_session.query(Ingridient).all()
     allTypes = db.sqlalchemy_session.query(Type).all()
     form = DishForm()
-    choosen_ingridients = request.form.getlist('mymultiselect')
-    print(choosen_ingridients)
+    choosen_ingridients = request.form.getlist('select_ingridient')
+    print('choosen', choosen_ingridients)
     current_user = session.get('username')
     if (current_user == 'admin'):
         admin = True
@@ -280,6 +282,35 @@ def corellation():
                 output_dish = allData[index].__dict__
                 return render_template('correllation.html', current_user=current_user, admin = admin,  allData=allData, output_dish = output_dish, array = array)
     return render_template('correllation.html', current_user=current_user, allData=allData, admin = admin)
+@app.route('/fill_personal_data', methods = ['GET', 'POST'])
+def fill_personal_data():
+    current_user = session.get('username')
+    allDishes= db.sqlalchemy_session.query(Dish).all()
+
+    form = PersonalDataForm()
+    personal_data_obj = {
+    }
+    if request.method == 'POST':
+        if not form.validate():
+            return render_template('personal_data.html', form=form, form_name="New personal data", action="fill_personal_data")
+        else:
+            age = form.age.data
+            weight = form.weight.data
+            height = form.height.data
+
+            personal_data_obj = {
+                "age":age,
+                "weight":weight,
+                "height":height
+            }
+            a = []
+            a.append(personal_data_obj["age"])
+            a.append(personal_data_obj["weight"])
+            a.append(personal_data_obj["height"])
+            output_result = output(a)
+            print('output', output(a))
+            return render_template('correllation.html', allDishes = allDishes, output_result = output_result, pearson_res = pearson_res, current_user = current_user,  personal_data_obj = personal_data_obj)
+    return render_template('personal_data.html', current_user = current_user, form =form, form_name="New personal data", action="fill_personal_data")
 
 
 if __name__ == '__main__':

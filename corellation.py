@@ -18,6 +18,3 @@ def pearson(x,y):
     if den==0: return 0
     r=num/den
     return r
-
-
-# print(pearson(x,y))
