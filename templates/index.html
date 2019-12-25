@@ -57,17 +57,19 @@
             <div class="col-md-4 card">
                 <h2> {{ dish.dishname }}</h2>
                 {% for ingridient in choosen_ingridients %}
-                    <span >ingr {{ ingridient }}</span>
+                    <span > {{ ingridient }}</span>
                 {% endfor %}
                 <p>{{ dish.calories_amount }}</p>
                 <p>{{ dish.type }}</p>
                 <p><a class="btn btn-secondary" href="#" role="button"> Author: {{ dish.author }}</a>
-                <p><a href="/delete_dish_user?name={{dish.dishname}}"
-                       title="delete button">
-                        <button type="button" class="btn btn-danger" name="btn_delete_dish"
-                                data-user_id="{{dish.dishname}}">Delete
-                        </button>
-                    </a></p>
+                 {% if admin %}:
+                    <p><a href="/delete_dish_user?name={{dish.dishname}}"
+                           title="delete button">
+                            <button type="button" class="btn btn-danger" name="btn_delete_dish"
+                                    data-user_id="{{dish.dishname}}">Delete
+                            </button>
+                        </a></p>
+                 {% endif %}:
             </div>
         {% endfor %}
     </div>

@@ -3,6 +3,19 @@ from wtforms import StringField, IntegerField, SubmitField, HiddenField
 from wtforms import validators
 
 
+class PersonalDataForm(Form):
+    age = IntegerField("Age: ", [
+        validators.DataRequired("age"),
+        validators.NumberRange(min=14, max=120)])
+    weight = IntegerField("Weight: ", [
+        validators.DataRequired("Weight"),
+        validators.NumberRange(min=30, max=150)])
+    height = IntegerField("Height: ", [
+        validators.DataRequired("Height"),
+        validators.NumberRange(min=100, max=200)])
+    old_name = HiddenField()
+
+    submit = SubmitField("Save")
 class DishForm(Form):
     dishname = StringField("Dish name: ", [
         validators.DataRequired("Please enter dish name."),

@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                        <p>{{ form.ingridients.label }}</p>
-                    <select multiple id="mymultiselect" name="mymultiselect">
+                    <select multiple id="mymultiselect" name="select_ingridient">
                         {% for ingridient in allIngridients%}
                             <option value={{ingridient.ingridient}}>{{ingridient.ingridient}}</option>
                         {% endfor %}
