@@ -173,6 +173,7 @@ def new_dish():
                 dishname=form.dishname.data,
                 calories_amount=form.calories_amount.data,
                 ingridients = choosen_ingridients,
+                receipt = form.receipt.data,
                 author=current_user,
                 type=request.form.get('type_select'),
             )
@@ -266,9 +267,9 @@ def corellation():
 
     allData = db.sqlalchemy_session.query(Dish).all()
     current_user = session.get('username')
+    choosen_dish = request.form.get('comp_select')
     if(current_user == 'admin'):
         admin = True
-    choosen_dish = request.form.get('comp_select')
     if(choosen_dish == None):
         return render_template('correllation.html', current_user=current_user, allData=allData, selected= choosen_dish, admin = admin )
     else:
