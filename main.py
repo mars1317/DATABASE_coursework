@@ -68,6 +68,7 @@ def filtered_dishes():
     allDishes = db.sqlalchemy_session.query(Dish).all()
     filtered_dishes = []
     choosen_type = request.args.get('name')
+    current_user = session.get('username')
 
     if (choosen_type == 'all'):
         filtered_dishes = allDishes
