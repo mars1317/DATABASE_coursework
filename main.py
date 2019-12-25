@@ -77,7 +77,7 @@ def filtered_dishes():
             if(dish.type == choosen_type):
                 filtered_dishes.append(dish)
 
-    return render_template('index.html', current_user = current_user.username, allDishes = filtered_dishes, allTypes = allTypes)
+    return render_template('index.html', current_user = current_user, allDishes = filtered_dishes, allTypes = allTypes)
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     form = LoginForm()
