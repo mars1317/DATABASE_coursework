@@ -1,0 +1,47 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="table-responsive">
+    <table class="table">
+        <form class="form-inline" method="POST" action="{{ url_for('corellation') }}">
+          <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">Please select</span>
+                    <select name="comp_select" class="selectpicker form-control">
+                      {% for dish in allData%}
+                      <option value="{{ dish.dishname }}">{{dish.dishname}}</option>
+                      {% endfor %}
+                    </select>
+            </div>
+            <button type="submit" class="btn btn-default">Go</button>
+
+          </div>
+        </form>
+        <div class="container">
+            {% if (selected == None) %}
+                <div class="starter-template">
+                    <h1>Nothing was choosed yet</h1>
+                    <p class="lead"> to look for some dish choose one in dropdown option </p>
+                </div>
+            {%else %}
+                <div class="card">
+                  <div class="card-header">
+                    {{ output_dish.dishname}}
+                  </div>
+                    {% for key, value in (output_dish['ingridients']).items() %}
+                      <div class="card-body">
+                        <span class="card-text"> {{ key, value }} грамм</span>
+                      </div>
+                    {%endfor%}
+                </div>
+                <div>
+                    Similiar dishes:
+                </div>
+            {% endif %}
+    </div>
+    </table>
+</div>
+{% endblock %}
+</body>
+</html>
