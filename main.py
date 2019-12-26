@@ -65,12 +65,14 @@ def all_dishes():
     return render_template('index.html', current_user = current_user, admin = admin,  allDishes = allDishes, allTypes = allTypes)
 @app.route('/filtered_dishes')
 def filtered_dishes():
+
     allTypes = db.sqlalchemy_session.query(Type).all()
     allDishes = db.sqlalchemy_session.query(Dish).all()
     filtered_dishes = []
     choosen_type = request.args.get('name')
     current_user = session.get('username')
-
+    if (current_user == 'admin'):
+        admin = True
     if (choosen_type == 'all'):
         filtered_dishes = allDishes
     else:
@@ -78,7 +80,7 @@ def filtered_dishes():
             if(dish.type == choosen_type):
                 filtered_dishes.append(dish)
 
-    return render_template('index.html', current_user = current_user, allDishes = filtered_dishes, allTypes = allTypes)
+    return render_template('index.html', admin = admin, current_user = current_user, allDishes = filtered_dishes, allTypes = allTypes)
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     form = LoginForm()
