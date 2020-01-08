@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="table-responsive">
+<div style="text-align: center; font-size: 2em" class="table-responsive">
     <table class="table">
         <form class="form-inline" method="POST" action="{{ url_for('corellation') }}">
           <div class="form-group">
@@ -14,8 +14,8 @@
                     <button type="button" class="btn btn-success" name="btn_new_dish">GO</button>
                 </a>
           </div>
-            {% if personal_data_obj%}:
-                <div class="card" style="width: 18rem;">
+            {% if personal_data_obj%}
+                <div class="card" style="width: 18rem; margin-left:640px;">
                   <ul class="list-group list-group-flush">
                       <li class="list-group-item"> Age: {{ personal_data_obj["age"] }}</li>
                       <li class="list-group-item"> Weight: {{ personal_data_obj["weight"] }}</li>
@@ -29,7 +29,7 @@
               <div class="card-body">
                 <h5 class="card-title">Your norm of calories amount is {{output_result}} </h5>
                 <p class="card-text">Our special neuron system calculated it for you with aquracy of {{pearson_res}} </p>
-                <a href="" class="btn btn-primary">Look for dishes that fit you</a>
+                    <a href="#" class="badge badge-light">Dishes that fit you</a>
               </div>
             </div>
                 <div class ="row">
